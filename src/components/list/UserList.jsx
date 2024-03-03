@@ -1,5 +1,3 @@
-import React from "react";
-
 const UserList = ({ users }) => {
   return (
     <div>
@@ -10,11 +8,11 @@ const UserList = ({ users }) => {
             <th>Mail</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-testid="users">
           {users.map((user, i) => (
             <tr key={i}>
               <td>{user.name}</td>
-              <td>{user.mail}</td>
+              <td>{user.email}</td>
             </tr>
           ))}
         </tbody>
