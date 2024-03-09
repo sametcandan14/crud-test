@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import UserForm from "./UserForm";
 import user from "@testing-library/user-event";
 
@@ -23,4 +23,23 @@ test("addUser fonksiyonu doğru parametreleri alır", async () => {
     name: "mehmet",
     email: "mehmet123@gmail.com",
   });
+});
+
+test("form gönderildikten sonra inputların temizlenmesi gerekir.", async () => {
+  render(<UserForm addUser={() => {}} />);
+
+  const nameInp = screen.getByLabelText("İsim");
+  const emailInp = screen.getByLabelText("Email");
+  const btn = screen.getByRole("button");
+
+  user.type(nameInp, "ali");
+  user.type(emailInp, "alig@mail.com");
+
+  expect(nameInp).toHaveValue("ali");
+  expect(emailInp).toHaveValue("alig@mail.com");
+
+  user.click(btn);
+
+  await waitFor(() => expect(nameInp).toHaveValue(""));
+  await waitFor(() => expect(emailInp.value).toBe(""));
 });

@@ -7,6 +7,9 @@ const UserForm = ({ addUser }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addUser({ name, email });
+
+    setEmail("");
+    setName("");
   };
 
   return (
@@ -15,6 +18,7 @@ const UserForm = ({ addUser }) => {
         <div>
           <label htmlFor="name">İsim</label>
           <input
+            value={name}
             onChange={(e) => setName(e.target.value)}
             id="name"
             type="text"
@@ -24,6 +28,7 @@ const UserForm = ({ addUser }) => {
         <div>
           <label htmlFor="mail">Email</label>
           <input
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             id="mail"
             type="email"
